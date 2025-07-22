@@ -1,0 +1,32 @@
+/* body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+} */
+/* body{
+  background-color: #1B1B1F;
+  color: #fff;
+  flex:1;
+  
+} */
+
+.doubt-container{
+  padding: 30px  80px!important;
+  background-color: pink; 
+}
+.boxes{
+  border: 2px solid green;
+ 
+}
+.footer{
+  height: 120px;
+  color: rgb(176, 171, 171);
+ background-color: #1B1B1F;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ border-top: 2px solid #00000c;
+}
