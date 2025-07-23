@@ -55,8 +55,7 @@ function Navbar() {
   <div className="container-fluid">
    
     <span className="navbar-brand offset-1" >
-      <img src="pic1.png" alt="Logo" width="20" height="30" className="d-inline-block align-text-top "/>
-     Solve
+     DoubtUnZip
     </span>
  
     
@@ -64,12 +63,9 @@ function Navbar() {
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-       <form className="d-flex offset-1 mt-sm-3" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-primary" type="submit">Search</button>
-      </form> 
-      <ul className="navbar-nav offset-5 mb-2 mb-lg-0 ">
-        {
+      
+      <ul className="navbar-nav ms-md-5 mb-2 mb-lg-0 ">
+         {
           isLoggedIn?(
            <li className="nav-item">
               <Link to='/educator/list'  className='nav-link active'> Educator List </Link>
@@ -83,6 +79,7 @@ function Navbar() {
            </li>                                            
           ):null
         }
+
         <li className="nav-item">
           <Link className="nav-link active" aria-current="page" to="/signup">Sign Up</Link>
         </li>

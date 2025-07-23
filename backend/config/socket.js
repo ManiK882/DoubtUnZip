@@ -15,8 +15,9 @@ const initSocket =(server)=>{
     socket.join(roomId);
    })
 
-   socket.on('sendMessage',({roomId,message,sender,receiver})=>{
-    io.to(roomId).emit('receiveMessage',{message,sender});
+   socket.on('sendMessage',({roomId,text,messageFrom,messageTo})=>{
+    
+    io.to(roomId).emit('receiveMessage',{text,messageFrom,messageTo});
    })
 
     socket.on('disconnect',()=>{

@@ -9,14 +9,16 @@ const ChatBox = ({ receiver }) => {
   const bottomRef = useRef(null);
   //creating roomid
   const roomId = user?.role === 'educator'?
-  `${user?._id}-${receiver._id}`:`${receiver._id}-${user?._id}`;
+  `${user?._id}-${receiver?._id}`:`${receiver?._id}-${user?._id}`;
 
   const fetchMessage = async() => {
     try {
       const { data } = await axios.get('/message/getMessage',{params: {
        roomId:roomId
       }})
+      console.log("frontend get api call",data.existingMessage);
       setMessages(data.existingMessage);
+      
     } catch (error) {
       console.log("Error in fetching the messages", error?.reponse?.data?.message);
     }
@@ -38,8 +40,8 @@ const ChatBox = ({ receiver }) => {
  useEffect(()=>{
   socket.emit('joinRoom',roomId);
 
-  socket.on('receiveMessage',({message,sender})=>{
-    setMessages((prev)=>[...prev,{message,sender}]);
+  socket.on('receiveMessage',({text,messageFrom,messageTo})=>{
+    setMessages((prev)=>[...prev,{text,messageFrom,messageTo}]);
   })
 
   return()=>{
@@ -61,8 +63,9 @@ const ChatBox = ({ receiver }) => {
 
       const res = await axios.post('/message/sendMessage', newMessage);
 
-      setMessages((prev) => [...prev, res.data]);
-
+      
+      console.log("coming from post call ",res.data);
+      console.log("newMessage",res.data.newMessage);
       socket.emit('sendMessage',res.data);
 
       setMsg('');
@@ -75,7 +78,7 @@ const ChatBox = ({ receiver }) => {
   return (
     <div>
       <div className="card shadow p-4 mx-auto" style={{ maxWidth: '700px' }}>
-        <h4 className="card-title mb-3 text-primary">Chat with {receiver.name}</h4>
+        <h4 className="card-title mb-3 text-primary">Chat with {receiver?.name}</h4>
 
         <div
           className="border rounded p-3 mb-3 bg-light"
