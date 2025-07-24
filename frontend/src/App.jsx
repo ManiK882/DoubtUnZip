@@ -15,6 +15,7 @@ import RequestList from './pages/RequestList'
 import FollowerList from './pages/FollowerList'
 import ChatPage from './pages/ChatPage'
 import FollowingPage from './pages/FollowingPage'
+import AllDoubts from './pages/AllDoubts'
 function App() {
   
 
@@ -25,7 +26,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}/>     
       <Route path='/login'element={<Login/>}/>
-      <Route path='/signup'element={<Signup/>}/>      
+      <Route path='/signup'element={<Signup/>}/> 
+      <Route path='/alldoubts'element={<AllDoubts/>}/>     
       <Route path='/doubt/:id'element={<Doubt/>}/> 
       <Route path='/profile'element={<ProfilePage/>}  /> 
       <Route path='/following' element={<FollowingPage/>} /> 

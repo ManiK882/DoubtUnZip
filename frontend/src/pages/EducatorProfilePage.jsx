@@ -2,7 +2,6 @@ import React ,{useContext, useEffect, useState} from 'react'
 import axios from '../api/axios';
 import { VscBell } from "react-icons/vsc";
 import { VscBellDot } from "react-icons/vsc";
-import '../style/ProfilePage.css';
 import {Link, useParams} from 'react-router-dom';
 import { GeneralContext } from './GeneralContext';
 

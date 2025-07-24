@@ -1,18 +1,38 @@
-import axios from 'axios';
+
 import {Link,useNavigate} from 'react-router-dom';
 import React ,{useContext}from 'react'
-
-import '../style/ProfilePage.css'
-
 import { FaUserCheck } from "react-icons/fa";
-
 import { IoCameraSharp } from "react-icons/io5";
 import { MdTextsms } from "react-icons/md";
 import { GeneralContext } from './GeneralContext';
+import Swal from 'sweetalert2';
+import axios from '../api/axios.js';
 
 const ProfilePage = () => {
   const {user} = useContext(GeneralContext);
+  const handleTextInput= async()=>{
+  const { value: text ,isConfirmed} = await Swal.fire({
+  input: "textarea",
+  inputLabel: " Ask Your Doubt",
+  inputPlaceholder: "Type your doubt here...",
+  inputAttributes: {
+    "aria-label": "Type your doubt here"
+  },
   
+  showCancelButton: true
+});
+ 
+if(isConfirmed && text){
+  try {
+    const res = await axios.post('/doubts/newDoubt',{doubt:text});
+    Swal.fire('Submitted!','success');
+  } catch (error) {
+    Swal.fire("Error!",'error');
+    console.log(error);
+  }
+ }
+
+  }
   return (
     <>
       <div className="container mt-5">
@@ -51,7 +71,7 @@ const ProfilePage = () => {
             <button className="btn btn-outline-secondary">
               <IoCameraSharp />
             </button>
-            <button className="btn btn-outline-secondary">
+            <button className="btn btn-outline-secondary" onClick={handleTextInput}>
               <MdTextsms />
             </button>
           </div>

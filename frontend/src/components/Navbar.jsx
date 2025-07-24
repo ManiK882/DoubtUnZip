@@ -75,7 +75,7 @@ function Navbar() {
         {
           isLoggedIn?(
            <li className="nav-item">
-              <Link to='/educator/list' className='nav-link active'> All Doubts </Link>
+              <Link to='/alldoubts' className='nav-link active'> All Doubts </Link>
            </li>                                            
           ):null
         }

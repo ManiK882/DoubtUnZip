@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
 const DoubtSchema = new Schema({
-    title: String,
-    description: String,
+   doubt: String,
+    
     image: String,
     tags: [String],
     postedBy: {
