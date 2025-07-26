@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { IoReturnDownBackOutline } from "react-icons/io5";
 import { useParams } from 'react-router-dom'
-import axios from 'axios';
+import axios from '../api/axios.js'
 
 
 function Doubt() {
@@ -11,12 +11,7 @@ function Doubt() {
     const [answer,setAnswer]=useState();
     const [dbAnswer,setDbAnswer]=useState([]);
     const handleClick=()=>{
-        if(!replayBtn){
-            setReplayBtn(true);
-        }
-        else{
-            setReplayBtn(false);
-        }
+        setReplayBtn(!replayBtn);
     }
     const handleChange=(e)=>{
         const {value}=e.target;       
@@ -26,25 +21,26 @@ function Doubt() {
     const handleSubmit=async(e)=>{
         e.preventDefault();
         try {
-            const {data}=await axios.post("http://localhost:4000/addAnswer",{answer,id});
+            const {data}=await axios.post("/answer/addAnswer",{answer,id});
             
-            const {success,message,newAnswer}=data;
+            const {success,message}=data;
             if(success){
                 console.log(message);
             }
             else{
-                console.log(message);
+                console.log("backend",message);
             }
         } catch (error) {
-            console.log(error);
+            console.log("frontend",error);
         }
     }
     useEffect(() => {
         const fetchDoubt = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:4000/doubt/${id}`);
+                const { data } = await axios.get(`/doubts/${id}`);
                 setDoubtInfo(data);               
                 const {answers}=data;
+                console.log(answer);
                setDbAnswer(answers);
             } catch (error) {
                 console.log(error)
@@ -61,7 +57,7 @@ function Doubt() {
     <div className="col-12 col-md-6 offset-md-3">
       
         <div className="mb-3 text-center">
-          <h4>{doubtInfo.title}</h4>
+          <h4>{doubtInfo?.doubt}</h4>
         </div>
         <div className="text-center">
           <button className="btn btn-primary" onClick={handleClick}>
@@ -72,14 +68,14 @@ function Doubt() {
        replayBtn &&
        <div className='mt-3 '>
            <form onSubmit={handleSubmit}>  
-        <label for="answers" class="form-label">Write Answer</label>
-        <textarea class="form-control" id="answers" rows="3" name='answer' value={answer} onChange={handleChange}></textarea>
+        <label forhtml="answers" className="form-label">Write Answer</label>
+        <textarea className="form-control" id="answers" rows="3" name='answer' value={answer} onChange={handleChange}></textarea>
         <button type='submit' className='btn btn-outline-primary text-center mt-3'>submit</button>
         </form>
         </div>  
        }    
        {
-      dbAnswer.length>0?(
+      dbAnswer?.length>0?(
         dbAnswer.map((i)=>{
             return(
                 <p>{i.answerText}</p>

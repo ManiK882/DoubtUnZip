@@ -19,7 +19,8 @@ const AllDoubts = () => {
     <>
       {
         allDoubts && allDoubts.map((d,index)=>{
-           return <Link to ={`/doubt/${d._id}`}key={index}>{d.doubt}</Link>
+           return(           
+             <Link to ={`/doubt/${d._id}`}key={index}>{d.doubt}</Link>)
         })
       }
     </>

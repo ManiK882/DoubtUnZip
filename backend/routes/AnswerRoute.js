@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
+const {AnswerModel} = require('../model/answer.js');
+const {DoubtModel}=require('../model/doubt.js');
 router.post('/addAnswer', async (req, res) => {
     try {
         const { answer, id } = req.body;
@@ -17,7 +18,7 @@ router.post('/addAnswer', async (req, res) => {
         }
         existingDoubt.answers.push(newAnswer._id);
         await existingDoubt.save();
-        res.status(200).json({ success:true,message: "Answer added", newAnswer });
+        res.status(200).json({ success:true,message: "Answer added" });
     } catch (error) {
         return res.json({success:false,message:error.message})
     }
